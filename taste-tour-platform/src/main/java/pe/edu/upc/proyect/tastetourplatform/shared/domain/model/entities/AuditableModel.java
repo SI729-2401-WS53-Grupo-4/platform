@@ -1,4 +1,4 @@
-package pe.edu.upc.proyect.tastetourplatform.shared.interfaces.rest.resources;
+package pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
