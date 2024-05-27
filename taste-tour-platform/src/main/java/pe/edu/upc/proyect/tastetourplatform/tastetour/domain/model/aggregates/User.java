@@ -24,9 +24,6 @@ public class User extends AuditableModel {
     @OneToOne(mappedBy = "user",cascade =CascadeType.ALL)
     private DebitCard debitCard;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Tour> tours;
-
     public User(){
         this.userRecordId = new UserRecordId();
     }
