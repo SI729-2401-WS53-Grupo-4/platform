@@ -1,9 +1,6 @@
 package pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.aggregates;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.AuditableModel;
 
@@ -17,4 +14,7 @@ public class DebitCard extends AuditableModel {
     private String cvv;
     private String date;
     private String name;
+    @OneToOne
+    @JoinColumn(name="user_id")
+    private User user;
 }
