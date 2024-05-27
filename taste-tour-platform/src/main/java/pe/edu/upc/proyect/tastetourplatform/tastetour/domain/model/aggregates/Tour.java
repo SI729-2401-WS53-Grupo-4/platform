@@ -31,14 +31,6 @@ public class Tour extends AuditableModel {
    @Embedded
    private final TourPath tourPath;
 
-   @ManyToOne
-   @JoinColumn(name="user_id")
-   private User user;
-
-   @ManyToOne
-   @JoinColumn(name = "restaurant_id")
-   private Restaurant restaurant;
-
    public Tour(){
        this.titleTour = Strings.EMPTY;
        this.instructor = Strings.EMPTY;
