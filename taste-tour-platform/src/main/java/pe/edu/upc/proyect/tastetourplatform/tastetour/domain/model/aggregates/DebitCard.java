@@ -9,11 +9,12 @@ import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.Auditab
 
 @Getter
 @Entity
-public class Restaurant extends AuditableModel {
+public class DebitCard extends AuditableModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String num;
+    private String cvv;
+    private String date;
     private String name;
-    private String location;
-    private String time;
 }
