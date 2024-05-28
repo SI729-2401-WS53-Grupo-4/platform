@@ -1,17 +1,17 @@
-package pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.valueobjects;
+package pe.edu.upc.proyect.tastetourplatform.restaurant.domain.model.valueobjects;
 
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public record ProfileId(Long profileId) {
+public record OwnerId(Long profileId) {
 
-    public ProfileId {
+    public OwnerId {
         if (profileId < 0) {
             throw new IllegalArgumentException("ProfileId cannot be negative");
         }
     }
 
-    public ProfileId() {
+    public OwnerId() {
         this(0L);
     }
 }

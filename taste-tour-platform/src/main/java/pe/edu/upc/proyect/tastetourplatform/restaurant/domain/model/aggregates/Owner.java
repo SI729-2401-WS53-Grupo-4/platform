@@ -1,11 +1,9 @@
-package pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.aggregates;
+package pe.edu.upc.proyect.tastetourplatform.restaurant.domain.model.aggregates;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.AuditableModel;
-import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.valueobjects.ProfileId;
-
-import java.util.List;
+import pe.edu.upc.proyect.tastetourplatform.restaurant.domain.model.valueobjects.OwnerId;
 
 @Entity
 public class Owner extends AuditableModel {
@@ -14,7 +12,7 @@ public class Owner extends AuditableModel {
     private Long id;
 
     @Getter
-    private ProfileId profileId;
+    private OwnerId ownerId;
 
     @OneToOne(mappedBy = "owner",cascade = CascadeType.ALL)
     private Restaurant restaurant;
