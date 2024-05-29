@@ -7,6 +7,7 @@ import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.Auditab
 import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.entities.TourPathItem;
 import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.valueobjects.TourPath;
 
+
 @Getter
 @Entity
 public class Tour extends AuditableModel {
