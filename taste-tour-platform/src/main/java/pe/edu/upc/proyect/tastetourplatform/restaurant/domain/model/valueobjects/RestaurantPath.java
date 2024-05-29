@@ -17,7 +17,7 @@ public RestaurantPath(){
 public void addRestaurant(Long restaurantId, RestaurantPathItem nextItem){
     System.out.println("Adding item to restaurant path");
     RestaurantPathItem restaurantPathItem = new RestaurantPathItem();
-    System.out.println("restaurant id" + RestaurantPathItem.getRestaurantId());
+    //System.out.println("restaurant id" + RestaurantPathItem.getRestaurantId());
 
 }
 }
