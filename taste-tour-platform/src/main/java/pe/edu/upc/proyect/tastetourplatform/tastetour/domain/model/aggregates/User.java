@@ -13,6 +13,13 @@ public class User extends AuditableModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String firstName;
+    private String lastName;
+    private String password;
+    private String location;
+    private String birthdate;
+    private String email;
+    private String phone;
 
     @Getter
     @Embedded
@@ -23,6 +30,9 @@ public class User extends AuditableModel {
 
     @OneToOne(mappedBy = "user",cascade =CascadeType.ALL)
     private DebitCard debitCard;
+
+    @OneToOne(mappedBy = "user",cascade =CascadeType.ALL)
+    private Review review;
 
     public User(){
         this.userRecordId = new UserRecordId();
