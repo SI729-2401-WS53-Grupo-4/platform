@@ -6,5 +6,5 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/Api/Tour")
 public class TourController {
-
+    
 }
