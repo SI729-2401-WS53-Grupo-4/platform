@@ -6,13 +6,15 @@ import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.Auditab
 
 @Entity
 @Getter
-@Table(name = "Clases")
-public class Clases extends AuditableModel {
+@Table(name= "Instructor")
+public class Instructor extends AuditableModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String titleClass;
+    private String firstName;
 
-    private String duration;
+    private String lastName;
+
+    private String rating;
 }
