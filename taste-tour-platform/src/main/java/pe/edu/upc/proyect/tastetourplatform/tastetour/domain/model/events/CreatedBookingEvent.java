@@ -1,4 +1,4 @@
 package pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.events;
 
-public class UpdatedTour {
+public class CreatedBookingEvent {
 }

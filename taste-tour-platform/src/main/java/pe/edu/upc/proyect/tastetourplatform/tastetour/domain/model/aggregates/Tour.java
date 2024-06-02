@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.AuditableModel;
+import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.valueobjects.*;
 
 @Entity
 @Getter
@@ -16,20 +17,35 @@ public class Tour extends AuditableModel {
 
     private String titleTour;
 
-    @ManyToOne
-    @JoinColumn(name = "instructor_id")
+    @Embedded
     private Instructor instructor;
 
     private String description;
 
-    private String rating;
+    @Embedded
+    private Rating rating;
 
-    private String max;
+    @Embedded
+    private Capacity capacity;
 
-    private String duration;
+    @Embedded
+    private Duration duration;
 
     private String date;
 
-    private String price;
+    @Embedded
+    private Price price;
+
+    public Tour(){};
+    public Tour(String titleTour, Instructor instructor, String description, Rating rating, Capacity capacity, Duration duration, String date, Price price){
+        this.titleTour = titleTour;
+        this.instructor = instructor;
+        this.description = description;
+        this.rating = rating;
+        this.capacity = capacity;
+        this.duration = duration;
+        this.date = date;
+        this.price = price;
+    }
 
 }
