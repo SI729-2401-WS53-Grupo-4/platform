@@ -1,7 +1,7 @@
 package pe.edu.upc.proyect.tastetourplatform.tastetour.application.internal.commandservices;
 
 import org.springframework.stereotype.Service;
-import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.aggregates.Tour;
+import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.entities.Tour;
 import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.commands.AddTourCommand;
 import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.commands.DeleteTourCommand;
 import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.services.TourCommandService;

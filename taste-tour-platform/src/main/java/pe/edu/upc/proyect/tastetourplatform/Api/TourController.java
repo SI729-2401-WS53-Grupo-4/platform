@@ -2,7 +2,8 @@ package pe.edu.upc.proyect.tastetourplatform.Api;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.aggregates.Tour;
+import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.exceptions.TourNotFoundException;
+import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.entities.Tour;
 import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.commands.AddTourCommand;
 import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.commands.DeleteTourCommand;
 import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.queries.GetAllToursQuery;
@@ -32,7 +33,8 @@ public class TourController {
 
     @GetMapping("/{id}")
     public Optional<Tour> getTourById(@PathVariable Long id){
-        return tourQueryService.handle(new GetToursByIdQuery(id));
+        return Optional.ofNullable(tourQueryService.handle(new GetToursByIdQuery(id))
+                .orElseThrow(() -> new TourNotFoundException(id)));
     }
     @PostMapping("/create")
     public ResponseEntity<Long> addTour(@RequestBody AddTourCommand command) {

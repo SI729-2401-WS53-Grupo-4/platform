@@ -13,4 +13,5 @@ import java.util.Date;
 @MappedSuperclass
 @Data
 public class AuditableModel {
+
 }

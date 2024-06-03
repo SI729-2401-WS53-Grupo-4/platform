@@ -1,7 +1,7 @@
 package pe.edu.upc.proyect.tastetourplatform.tastetour.application.internal.queryservices;
 
 import org.springframework.stereotype.Service;
-import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.aggregates.Tour;
+import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.entities.Tour;
 import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.queries.GetAllToursQuery;
 import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.queries.GetToursByIdQuery;
 import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.services.TourQueryService;

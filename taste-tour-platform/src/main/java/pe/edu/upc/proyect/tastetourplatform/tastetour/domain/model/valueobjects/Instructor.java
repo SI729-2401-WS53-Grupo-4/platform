@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 import java.util.Objects;
 
 @Embeddable
-public record Instructor(String firstName, String lastName, int rating) {
+public record Instructor(String firstName, String lastName) {
 
     public Instructor {
         if (firstName == null || firstName.isBlank()) {
@@ -14,9 +14,6 @@ public record Instructor(String firstName, String lastName, int rating) {
         }
         if (lastName == null || lastName.isBlank()) {
             throw new IllegalArgumentException("Last name cannot be null or empty");
-        }
-        if (rating < 0 || rating > 5) {
-            throw new IllegalArgumentException("Rating must be between 0 and 5");
         }
     }
 }

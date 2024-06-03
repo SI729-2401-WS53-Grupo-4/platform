@@ -1,4 +1,4 @@
-package pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.aggregates;
+package pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -21,7 +21,6 @@ public class Tour extends AuditableModel {
     @AttributeOverrides({
             @AttributeOverride(name = "firstName", column = @Column(name = "instructor_first_name")),
             @AttributeOverride(name = "lastName", column = @Column(name = "instructor_last_name")),
-            @AttributeOverride(name = "rating", column = @Column(name = "instructor_rating"))
     })
     private Instructor instructor;
 
@@ -57,5 +56,4 @@ public class Tour extends AuditableModel {
         this.date = date;
         this.price = price;
     }
-
 }
