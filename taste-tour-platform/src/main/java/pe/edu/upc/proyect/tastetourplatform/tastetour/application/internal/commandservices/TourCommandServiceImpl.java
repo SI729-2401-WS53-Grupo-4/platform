@@ -15,11 +15,12 @@ public class TourCommandServiceImpl implements TourCommandService {
         this.tourRepository = tourRepository;
     }
 
+    @Override
     public Long handle(AddTourCommand command){
         Tour tour = new Tour(
                 command.titleTour(),
-                command.description(),
                 command.instructor(),
+                command.description(),
                 command.rating(),
                 command.capacity(),
                 command.duration(),
@@ -29,7 +30,9 @@ public class TourCommandServiceImpl implements TourCommandService {
         tourRepository.save(tour);
         return tour.getId();
     }
+    @Override
     public void handle(DeleteTourCommand command){
         tourRepository.deleteById(command.tourId());
+        System.out.println("Tour Delete");
     }
 }

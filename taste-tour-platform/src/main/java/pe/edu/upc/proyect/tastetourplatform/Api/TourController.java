@@ -6,10 +6,12 @@ import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.aggregates.To
 import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.commands.AddTourCommand;
 import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.commands.DeleteTourCommand;
 import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.queries.GetAllToursQuery;
+import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.queries.GetToursByIdQuery;
 import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.services.TourCommandService;
 import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.services.TourQueryService;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -28,6 +30,10 @@ public class TourController {
         return tourQueryService.handle(new GetAllToursQuery());
     }
 
+    @GetMapping("/{id}")
+    public Optional<Tour> getTourById(@PathVariable Long id){
+        return tourQueryService.handle(new GetToursByIdQuery(id));
+    }
     @PostMapping("/create")
     public ResponseEntity<Long> addTour(@RequestBody AddTourCommand command) {
         Long tourId = tourCommandService.handle(command);

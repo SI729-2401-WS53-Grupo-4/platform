@@ -18,10 +18,12 @@ public class TourQueryServiceImpl implements TourQueryService {
         this.tourRepository = tourRepository;
     }
 
+    @Override
     public List<Tour> handle(GetAllToursQuery query){
         return tourRepository.findAll();
     }
 
+    @Override
     public Optional<Tour> handle(GetToursByIdQuery query){
         return tourRepository.findById(query.tourId());
     }
