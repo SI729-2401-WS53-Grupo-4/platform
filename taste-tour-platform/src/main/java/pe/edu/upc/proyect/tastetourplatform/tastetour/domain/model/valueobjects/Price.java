@@ -4,17 +4,13 @@ import jakarta.persistence.Embeddable;
 import java.math.BigDecimal;
 
 @Embeddable
-public record Price(Integer amount) {
-
+public record Price(Integer value) {
     public Price {
-        if (amount < 0) {
-            throw new IllegalArgumentException("Price amount must be positive");
+        if (value == null) {
+            throw new IllegalArgumentException("Price cannot be null");
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Price: " +
-                "amount=" + amount + '\'';
+        if (value < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
     }
 }

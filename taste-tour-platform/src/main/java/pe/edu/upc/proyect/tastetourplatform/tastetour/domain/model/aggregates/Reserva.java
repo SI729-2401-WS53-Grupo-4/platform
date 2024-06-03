@@ -16,7 +16,12 @@ public class Reserva extends AuditableModel {
 
     private String nameTour;
 
-    private String duration;
+    private Integer duration;
 
+    public Reserva(String nameTour, Integer duration){
+        this.nameTour = nameTour;
+        this.duration = duration;
+    }
 
+    public Reserva(){}
 }
