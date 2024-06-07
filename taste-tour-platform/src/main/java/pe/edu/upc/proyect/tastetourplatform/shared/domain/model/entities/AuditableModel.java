@@ -14,11 +14,4 @@ import java.util.Date;
 @Data
 public class AuditableModel {
 
-    @CreatedDate
-    @Column(nullable = false, updatable = false)
-    private Date createdAt;
-
-    @LastModifiedDate
-    @Column(nullable = false)
-    private Date updatedAt;
 }

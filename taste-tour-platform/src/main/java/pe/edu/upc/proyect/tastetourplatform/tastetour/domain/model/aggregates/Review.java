@@ -2,18 +2,25 @@ package pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.aggregates;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.AuditableModel;
+import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.valueobjects.*;
 
-@Getter
 @Entity
+@Getter
+@Setter
+@Table(name = "Review")
 public class Review extends AuditableModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String rating;
-    private String comment;
-    @OneToOne
-    @JoinColumn(name="user_id")
-    private User user;
+
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "review_rating"))
+    private Rating rating;
+
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "review_comment"))
+    private Comment comment;
 
 }

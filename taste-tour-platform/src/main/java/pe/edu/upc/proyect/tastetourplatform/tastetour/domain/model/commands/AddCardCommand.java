@@ -1,4 +1,6 @@
 package pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.commands;
 
-public record AddCardCommand(String num, String cvv, String date, String name) {
+import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.valueobjects.*;
+
+public record AddCardCommand(NumCard numCard, Cvv cvv, String date, String name) {
 }

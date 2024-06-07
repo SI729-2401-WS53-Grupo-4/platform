@@ -1,4 +1,6 @@
 package pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.commands;
 
-public record CreateReviewCommand(String rating, String comment) {
+import pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.valueobjects.*;
+
+public record CreateReviewCommand(Rating rating, Comment comment) {
 }

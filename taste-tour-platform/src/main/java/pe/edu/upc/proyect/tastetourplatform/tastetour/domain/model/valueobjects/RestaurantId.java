@@ -1,4 +1,12 @@
 package pe.edu.upc.proyect.tastetourplatform.tastetour.domain.model.valueobjects;
 
-public record RestaurantId() {
+public record RestaurantId(Long restaurantId) {
+    public RestaurantId{
+        if(restaurantId < 0){
+            throw new IllegalArgumentException("Restaurant restaurantId cannot be negative");
+        }
+    }
+    public RestaurantId(){
+        this(0L);
+    }
 }
