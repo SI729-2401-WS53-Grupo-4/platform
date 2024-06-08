@@ -9,8 +9,8 @@ import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.valueobjects.*;
 @Entity
 @Getter
 @Setter
-@Table(name = "Tour")
-public class Tour extends AuditableModel {
+@Table(name = "tour")
+public class Tour{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

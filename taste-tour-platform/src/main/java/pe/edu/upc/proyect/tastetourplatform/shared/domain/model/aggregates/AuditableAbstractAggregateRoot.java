@@ -1,18 +1,21 @@
-package pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities;
+package pe.edu.upc.proyect.tastetourplatform.shared.domain.model.aggregates;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.domain.AbstractAggregateRoot;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
-public class AuditableModel {
+public class AuditableAbstractAggregateRoot<T extends AbstractAggregateRoot<T>> extends AbstractAggregateRoot<T> {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   @CreatedDate
   @Column(nullable = false, updatable = false)
@@ -21,6 +24,10 @@ public class AuditableModel {
   @LastModifiedDate
   @Column(nullable = false)
   private Date updatedAt;
+
+  public Long getId() {
+    return id;
+  }
 
   public Date getCreatedAt() {
     return createdAt;
