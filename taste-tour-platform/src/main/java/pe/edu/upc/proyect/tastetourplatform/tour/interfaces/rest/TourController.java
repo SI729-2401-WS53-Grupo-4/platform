@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.exceptions.TourNotFoundException;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.entities.Tour;
-import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.commands.AddTourCommand;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.commands.DeleteTourCommand;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.queries.GetAllToursQuery;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.queries.GetToursByIdQuery;
@@ -33,16 +32,6 @@ public class TourController {
         this.tourQueryService = tourQueryService;
     }
 
-    @GetMapping
-    public List<Tour> getAllTours(){
-        return tourQueryService.handle(new GetAllToursQuery());
-    }
-
-    @GetMapping("/{id}")
-    public Optional<Tour> getTourById(@PathVariable Long id){
-        return Optional.ofNullable(tourQueryService.handle(new GetToursByIdQuery(id))
-                .orElseThrow(() -> new TourNotFoundException(id)));
-    }
     @PostMapping("/create")
     public ResponseEntity<TourResource> createTour(@RequestBody CreateTourResource createTourResource){
         var createTourCommand = CreateTourCommandFromResourceAssembler.toCommandFromResource(createTourResource);
@@ -58,6 +47,24 @@ public class TourController {
             return ResponseEntity.badRequest().build();
         var tourResource = TourResourceFromEntityAssembler.toResourceFromEntity(tour.get());
         return new ResponseEntity<>(tourResource, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TourResource>> getAllTours(){
+        var getAllToursQuery = new GetAllToursQuery();
+        var tours = tourQueryService.handle(getAllToursQuery);
+        var tourResources= tours.stream().map(TourResourceFromEntityAssembler::toResourceFromEntity).toList();
+        return ResponseEntity.ok(tourResources);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<TourResource> getTourById(@PathVariable Long id){
+        var getTourByIdQuery = new GetToursByIdQuery(id);
+        var tour = tourQueryService.handle(getTourByIdQuery);
+
+        if (tour.isEmpty())
+            return ResponseEntity.badRequest().build();
+        var tourResource = TourResourceFromEntityAssembler.toResourceFromEntity(tour.get());
+        return ResponseEntity.ok(tourResource);
     }
 
     @PutMapping("/{id}")
