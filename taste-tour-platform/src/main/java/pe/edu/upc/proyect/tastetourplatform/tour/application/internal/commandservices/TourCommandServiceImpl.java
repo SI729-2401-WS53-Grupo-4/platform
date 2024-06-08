@@ -1,11 +1,14 @@
 package pe.edu.upc.proyect.tastetourplatform.tour.application.internal.commandservices;
 
 import org.springframework.stereotype.Service;
+import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.commands.UpdateTourCommand;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.entities.Tour;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.commands.AddTourCommand;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.commands.DeleteTourCommand;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.services.TourCommandService;
 import pe.edu.upc.proyect.tastetourplatform.tour.insfractructure.persistence.jpa.repositories.TourRepository;
+
+import java.util.Optional;
 
 @Service
 public class TourCommandServiceImpl implements TourCommandService {
@@ -30,6 +33,21 @@ public class TourCommandServiceImpl implements TourCommandService {
         tourRepository.save(tour);
         return tour.getId();
     }
+
+    @Override
+    public Optional<Tour> handle(UpdateTourCommand command) {
+        var result = tourRepository.findById(command.tourId());
+        if (result.isEmpty())
+            throw new IllegalArgumentException("Tour does not exist");
+        var tourToUpdated = result.get();
+        try{
+            var updatedTour = tourRepository.save(tourToUpdated.updatedInformation(command.titleTour(),command.instructor(), command.description(),command.rating(),command.capacity(),command.duration(),command.date(),command.price()));
+            return Optional.of(updatedTour);
+        } catch (Exception e){
+            throw new IllegalArgumentException("Error while updating tour: " + e.getMessage());
+        }
+    }
+
     @Override
     public void handle(DeleteTourCommand command){
         tourRepository.deleteById(command.tourId());

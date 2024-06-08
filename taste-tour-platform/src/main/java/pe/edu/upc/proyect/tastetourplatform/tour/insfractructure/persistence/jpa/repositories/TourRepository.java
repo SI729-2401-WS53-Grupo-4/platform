@@ -6,5 +6,5 @@ import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.entities.Tour;
 
 @Repository
 public interface TourRepository extends JpaRepository<Tour, Long> {
-
+      boolean existsById(Long id);
 }

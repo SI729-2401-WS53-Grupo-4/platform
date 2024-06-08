@@ -13,8 +13,10 @@ import pe.edu.upc.proyect.tastetourplatform.tour.domain.services.TourCommandServ
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.services.TourQueryService;
 import pe.edu.upc.proyect.tastetourplatform.tour.interfaces.rest.resources.CreateTourResource;
 import pe.edu.upc.proyect.tastetourplatform.tour.interfaces.rest.resources.TourResource;
+import pe.edu.upc.proyect.tastetourplatform.tour.interfaces.rest.resources.UpdateTourResource;
 import pe.edu.upc.proyect.tastetourplatform.tour.interfaces.rest.transform.CreateTourCommandFromResourceAssembler;
 import pe.edu.upc.proyect.tastetourplatform.tour.interfaces.rest.transform.TourResourceFromEntityAssembler;
+import pe.edu.upc.proyect.tastetourplatform.tour.interfaces.rest.transform.UpdateTourCommandFromResourceAssembler;
 
 import java.util.List;
 import java.util.Optional;
@@ -58,9 +60,22 @@ public class TourController {
         return new ResponseEntity<>(tourResource, HttpStatus.CREATED);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<TourResource> updateTour(@PathVariable Long id, @RequestBody UpdateTourResource updateTourResource){
+        var updateTourCommand = UpdateTourCommandFromResourceAssembler.toCommandFromResource(id,updateTourResource);
+        var updatedTour = tourCommandService.handle(updateTourCommand);
+
+        if(updatedTour.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        }
+        var tourResource = TourResourceFromEntityAssembler.toResourceFromEntity(updatedTour.get());
+        return ResponseEntity.ok(tourResource);
+    }
     @DeleteMapping("/{id}")
-    public void deleteTour(@PathVariable Long id){
-        tourCommandService.handle(new DeleteTourCommand(id));
+    public ResponseEntity<?> deleteTour(@PathVariable Long id){
+        var deleteTourCommand = new DeleteTourCommand(id);
+        tourCommandService.handle(deleteTourCommand);
+        return ResponseEntity.ok("Tour with given id successfully deleted ");
     }
 
 }

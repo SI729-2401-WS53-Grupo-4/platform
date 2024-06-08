@@ -1,6 +1,7 @@
 package pe.edu.upc.proyect.tastetourplatform.tour.domain.model.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.AuditableModel;
@@ -10,7 +11,7 @@ import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.valueobjects.*;
 @Getter
 @Setter
 @Table(name = "tour")
-public class Tour{
+public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,6 +25,7 @@ public class Tour{
     })
     private Instructor instructor;
 
+    @NotNull
     private String description;
 
     @Embedded
@@ -45,6 +47,18 @@ public class Tour{
     private Price price;
 
     public Tour() {}
+
+    public Tour updatedInformation(String titleTour, Instructor instructor, String description, Rating rating, Capacity capacity, Duration duration, String date, Price price){
+        this.titleTour = titleTour;
+        this.instructor = instructor;
+        this.description = description;
+        this.rating = rating;
+        this.capacity = capacity;
+        this.duration = duration;
+        this.date = date;
+        this.price = price;
+        return this;
+    }
 
     public Tour(String titleTour, Instructor instructor, String description, Rating rating, Capacity capacity, Duration duration, String date, Price price) {
         this.titleTour = titleTour;
