@@ -6,6 +6,6 @@ import pe.edu.upc.proyect.tastetourplatform.tour.interfaces.rest.resources.TourR
 public class TourResourceFromEntityAssembler {
 
     public static TourResource toResourceFromEntity(Tour entity){
-        return new TourResource(entity.getId(), entity.getTitleTour(), entity.getDescription(), entity.getInstructor(),entity.getRating(),entity.getCapacity(),entity.getDuration(),entity.getDate(),entity.getPrice());
+        return new TourResource(entity.getId(), entity.getTitleTour(), entity.getDescription(), entity.getInstructor(),entity.getRating(),entity.getCapacity(),entity.getDuration(),entity.getDate(),entity.getPrice(),entity.getRestauranteId());
     }
 }

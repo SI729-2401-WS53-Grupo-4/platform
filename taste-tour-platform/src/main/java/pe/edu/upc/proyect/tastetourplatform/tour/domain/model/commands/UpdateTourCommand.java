@@ -10,5 +10,6 @@ public record UpdateTourCommand(Long tourId,
                                 Capacity capacity,
                                 Duration duration,
                                 String date,
-                                Price price) {
+                                Price price,
+                                Long restauranteId) {
 }

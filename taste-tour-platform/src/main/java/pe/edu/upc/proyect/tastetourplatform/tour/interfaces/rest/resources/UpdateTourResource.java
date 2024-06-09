@@ -9,5 +9,6 @@ public record UpdateTourResource(String titleTour,
                                  Capacity capacity,
                                  Duration duration,
                                  String date,
-                                 Price price) {
+                                 Price price,
+                                 Long restauranteId) {
 }

@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.AuditableModel;
+import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.aggregates.Restaurante;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.valueobjects.*;
 
 @Entity
@@ -46,9 +47,11 @@ public class Tour {
     @AttributeOverride(name = "value", column = @Column(name = "tour_price"))
     private Price price;
 
+    private Long restauranteId;
+
     public Tour() {}
 
-    public Tour updatedInformation(String titleTour, Instructor instructor, String description, Rating rating, Capacity capacity, Duration duration, String date, Price price){
+    public Tour updatedInformation(String titleTour, Instructor instructor, String description, Rating rating, Capacity capacity, Duration duration, String date, Price price,Long restauranteId){
         this.titleTour = titleTour;
         this.instructor = instructor;
         this.description = description;
@@ -57,10 +60,11 @@ public class Tour {
         this.duration = duration;
         this.date = date;
         this.price = price;
+        this.restauranteId = restauranteId;
         return this;
     }
 
-    public Tour(String titleTour, Instructor instructor, String description, Rating rating, Capacity capacity, Duration duration, String date, Price price) {
+    public Tour(String titleTour, Instructor instructor, String description, Rating rating, Capacity capacity, Duration duration, String date, Price price,Long restauranteId) {
         this.titleTour = titleTour;
         this.instructor = instructor;
         this.description = description;
@@ -69,5 +73,6 @@ public class Tour {
         this.duration = duration;
         this.date = date;
         this.price = price;
+        this.restauranteId = restauranteId;
     }
 }
