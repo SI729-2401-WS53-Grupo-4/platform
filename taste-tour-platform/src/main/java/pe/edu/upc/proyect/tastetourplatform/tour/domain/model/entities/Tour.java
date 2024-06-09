@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.AuditableModel;
-import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.aggregates.Restaurante;
+import pe.edu.upc.proyect.tastetourplatform.restaurant.domain.model.entities.Restaurant;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.valueobjects.*;
 
 @Entity
@@ -47,11 +46,13 @@ public class Tour {
     @AttributeOverride(name = "value", column = @Column(name = "tour_price"))
     private Price price;
 
-    private Long restauranteId;
+    @ManyToOne
+    @JoinColumn(name= "restaurant_id")
+    private Restaurant restaurantId;
 
     public Tour() {}
 
-    public Tour updatedInformation(String titleTour, Instructor instructor, String description, Rating rating, Capacity capacity, Duration duration, String date, Price price,Long restauranteId){
+    public Tour updatedInformation(String titleTour, Instructor instructor, String description, Rating rating, Capacity capacity, Duration duration, String date, Price price,Restaurant restaurantId){
         this.titleTour = titleTour;
         this.instructor = instructor;
         this.description = description;
@@ -60,11 +61,11 @@ public class Tour {
         this.duration = duration;
         this.date = date;
         this.price = price;
-        this.restauranteId = restauranteId;
+        this.restaurantId = restaurantId;
         return this;
     }
 
-    public Tour(String titleTour, Instructor instructor, String description, Rating rating, Capacity capacity, Duration duration, String date, Price price,Long restauranteId) {
+    public Tour(String titleTour, Instructor instructor, String description, Rating rating, Capacity capacity, Duration duration, String date, Price price,Restaurant restaurantId) {
         this.titleTour = titleTour;
         this.instructor = instructor;
         this.description = description;
@@ -73,6 +74,6 @@ public class Tour {
         this.duration = duration;
         this.date = date;
         this.price = price;
-        this.restauranteId = restauranteId;
+        this.restaurantId = restaurantId;
     }
 }

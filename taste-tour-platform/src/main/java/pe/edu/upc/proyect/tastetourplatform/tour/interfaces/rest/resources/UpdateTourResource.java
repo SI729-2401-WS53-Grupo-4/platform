@@ -1,5 +1,6 @@
 package pe.edu.upc.proyect.tastetourplatform.tour.interfaces.rest.resources;
 
+import pe.edu.upc.proyect.tastetourplatform.restaurant.domain.model.entities.Restaurant;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.valueobjects.*;
 
 public record UpdateTourResource(String titleTour,
@@ -10,5 +11,5 @@ public record UpdateTourResource(String titleTour,
                                  Duration duration,
                                  String date,
                                  Price price,
-                                 Long restauranteId) {
+                                 Restaurant restaurantId) {
 }

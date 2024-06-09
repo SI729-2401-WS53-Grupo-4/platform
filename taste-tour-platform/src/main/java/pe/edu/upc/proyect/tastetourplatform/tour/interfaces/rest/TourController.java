@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.proyect.tastetourplatform.restaurant.domain.model.entities.Restaurant;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.exceptions.TourNotFoundException;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.commands.AddRestaurantToTourCommand;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.entities.Tour;
@@ -81,13 +82,6 @@ public class TourController {
         }
         var tourResource = TourResourceFromEntityAssembler.toResourceFromEntity(updatedTour.get());
         return ResponseEntity.ok(tourResource);
-    }
-
-    @PostMapping("/{Id}/restaurant")
-    public ResponseEntity<Long> addRestaurantToTour(@PathVariable Long Id, @RequestBody Long restauranteId) {
-        AddRestaurantToTourCommand command = new AddRestaurantToTourCommand(Id, restauranteId);
-        Long updatedTourId = tourCommandService.handle(command);
-        return ResponseEntity.ok(updatedTourId);
     }
 
     @DeleteMapping("/{id}")

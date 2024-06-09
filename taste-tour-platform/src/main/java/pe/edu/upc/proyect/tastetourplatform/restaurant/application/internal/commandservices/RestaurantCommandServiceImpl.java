@@ -2,6 +2,7 @@ package pe.edu.upc.proyect.tastetourplatform.restaurant.application.internal.com
 
 import org.springframework.stereotype.Service;
 import pe.edu.upc.proyect.tastetourplatform.restaurant.domain.model.commands.CreateRestaurantCommand;
+import pe.edu.upc.proyect.tastetourplatform.restaurant.domain.model.commands.DeleteRestaurantCommand;
 import pe.edu.upc.proyect.tastetourplatform.restaurant.domain.model.entities.Restaurant;
 import pe.edu.upc.proyect.tastetourplatform.restaurant.domain.services.RestaurantCommandService;
 import pe.edu.upc.proyect.tastetourplatform.restaurant.infrastructure.persistence.jpa.repositories.RestaurantRepository;
@@ -28,6 +29,12 @@ this.restaurantRepository = restaurantRepository;
             throw new IllegalArgumentException("Error while saving restaurant: " + e.getMessage());
         }
         return restaurant.getId();
+    }
+
+    @Override
+    public void handle(DeleteRestaurantCommand command) {
+        restaurantRepository.deleteById(command.restaurantId());
+        System.out.println("Restaurant Delete");
     }
 }
 
