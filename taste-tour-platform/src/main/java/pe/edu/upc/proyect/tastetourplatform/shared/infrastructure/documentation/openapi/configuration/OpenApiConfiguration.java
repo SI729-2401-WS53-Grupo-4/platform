@@ -15,8 +15,8 @@ public class OpenApiConfiguration {
     var openApi = new OpenAPI();
     openApi
             .info(new Info()
-                    .title("Tour Platform API")
-                    .description("Tour Platform application REST API documentation.")
+                    .title("TasteTour Platform API")
+                    .description("TasteTour Platform application REST API documentation.")
                     .version("v1.0.0")
                     .license(new License().name("Apache 2.0")
                             .url("https://springdoc.org")))
