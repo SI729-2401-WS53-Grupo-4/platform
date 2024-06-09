@@ -1,6 +1,8 @@
 package pe.edu.upc.proyect.tastetourplatform.user.interfaces.rest;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyect.tastetourplatform.user.domain.model.commands.DeleteUserCommand;
@@ -20,7 +22,8 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/Api/User")
+@RequestMapping(value="/Api/TasteTour/User", produces = MediaType.APPLICATION_JSON_VALUE)
+@Tag(name="User", description = "User Managment Endpoints")
 public class UserController {
     private final UserCommandService userCommandService;
     private final UserQueryService userQueryService;

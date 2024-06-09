@@ -1,6 +1,8 @@
 package pe.edu.upc.proyect.tastetourplatform.tour.interfaces.rest;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.exceptions.TourNotFoundException;
@@ -23,7 +25,8 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/Api/Tour")
+@RequestMapping(value="/Api/TasteTour/Tour", produces = MediaType.APPLICATION_JSON_VALUE)
+@Tag(name="Tour", description = "Tour Managment Endpoints")
 public class TourController {
     private final TourCommandService tourCommandService;
     private final TourQueryService tourQueryService;

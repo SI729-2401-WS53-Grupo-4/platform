@@ -14,19 +14,21 @@ import pe.edu.upc.proyect.tastetourplatform.restaurant.domain.services.Restauran
 import pe.edu.upc.proyect.tastetourplatform.restaurant.domain.services.RestaurantQueryService;
 import pe.edu.upc.proyect.tastetourplatform.restaurant.interfaces.rest.resources.CreateRestaurantResource;
 import pe.edu.upc.proyect.tastetourplatform.restaurant.interfaces.rest.resources.RestaurantResource;
+import pe.edu.upc.proyect.tastetourplatform.restaurant.interfaces.rest.transform.CreateRestaurantCommandFromResourceAssembler;
+import pe.edu.upc.proyect.tastetourplatform.restaurant.interfaces.rest.transform.RestaurantResourceFromEntityAssembler;
 
 import java.awt.*;
 
 @RestController
-@RequestMapping(value="/api/v1/restaurants", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/api/TasteTour/restaurants", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name="Restaurant", description = "Restaurant Managment Endpoints")
 public class RestaurantController {
     private final RestaurantCommandService restaurantCommandService;
 
     private final RestaurantQueryService restaurantQueryService;
 
-    public RestaurantController(RestaurantCommandService restaurantCommandService, RestaurantQueryService restaurantQueryService, RestaurantCommandService restaurantCommandService1, RestaurantQueryService restaurantQueryService1){
 
+    public RestaurantController(RestaurantCommandService restaurantCommandService, RestaurantQueryService restaurantQueryService) {
         this.restaurantCommandService = restaurantCommandService;
         this.restaurantQueryService = restaurantQueryService;
     }
