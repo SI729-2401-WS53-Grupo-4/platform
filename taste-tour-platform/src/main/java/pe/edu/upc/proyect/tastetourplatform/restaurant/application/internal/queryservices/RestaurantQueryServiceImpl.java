@@ -1,4 +1,4 @@
-package pe.edu.upc.proyect.tastetourplatform.application.internal.queryservices;
+package pe.edu.upc.proyect.tastetourplatform.restaurant.application.internal.queryservices;
 
 public class RestaurantQueryServiceImpl {
 

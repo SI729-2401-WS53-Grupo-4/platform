@@ -1,4 +1,4 @@
-package pe.edu.upc.proyect.tastetourplatform.application.internal.commandservices;
+package pe.edu.upc.proyect.tastetourplatform.restaurant.application.internal.commandservices;
 
 import org.springframework.stereotype.Service;
 import pe.edu.upc.proyect.tastetourplatform.restaurant.domain.model.commands.CreateRestaurantCommand;
@@ -30,4 +30,4 @@ this.restaurantRepository = restaurantRepository;
         return restaurant.getId();
     }
 }
-}
+

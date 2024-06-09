@@ -1,4 +1,4 @@
-package pe.edu.upc.proyect.tastetourplatform.restaurant.interfaces.rest.transform;
+package pe.edu.upc.proyect.tastetourplatform.restaurant.interfaces.rest;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
