@@ -1,5 +1,6 @@
 package pe.edu.upc.proyect.tastetourplatform.user.interfaces.rest;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,7 +33,7 @@ public class UserController {
         this.userCommandService = userCommandService;
         this.userQueryService = userQueryService;
     }
-
+    @Operation(summary = "Registar un usuario")
     @PostMapping("/create")
     public ResponseEntity<UserResource> createUser(@RequestBody CreateUserResource createUserResource){
         var createUserCommand = CreateUserCommandFromResourceAssembler.toCommandFromResource(createUserResource);
@@ -49,7 +50,7 @@ public class UserController {
         var userResource = UserResourceFromEntityAssembler.toResourceFromEntity(user.get());
         return new ResponseEntity<>(userResource, HttpStatus.CREATED);
     }
-
+    @Operation(summary = "Obtener lista de usuarios registrados")
     @GetMapping
     public ResponseEntity<List<UserResource>> getAllUsers(){
         var getAllUsersQuery = new GetAllUsersQuery();
@@ -57,6 +58,7 @@ public class UserController {
         var userResources= users.stream().map(UserResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(userResources);
     }
+    @Operation(summary = "Obtener lista de usuarios registrados por Id")
     @GetMapping("/{id}")
     public ResponseEntity<UserResource> getUserById(@PathVariable Long id){
         var getUserByIdQuery = new GetUserByIdQuery(id);
@@ -67,7 +69,7 @@ public class UserController {
         var userResource = UserResourceFromEntityAssembler.toResourceFromEntity(user.get());
         return ResponseEntity.ok(userResource);
     }
-
+    @Operation(summary = "Modificar un perfil de usuario")
     @PutMapping("/{id}")
     public ResponseEntity<UserResource> updateUser(@PathVariable Long id, @RequestBody UpdateUserResource updateUserResource){
         var updateUserCommand = UpdateUserCommandFromResourceAssembler.toCommandFromResource(id,updateUserResource);
@@ -79,6 +81,7 @@ public class UserController {
         var userResource = UserResourceFromEntityAssembler.toResourceFromEntity(updatedUser.get());
         return ResponseEntity.ok(userResource);
     }
+    @Operation(summary = "Eliminar una cuenta de usuario")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id){
         var deleteUserCommand = new DeleteUserCommand(id);

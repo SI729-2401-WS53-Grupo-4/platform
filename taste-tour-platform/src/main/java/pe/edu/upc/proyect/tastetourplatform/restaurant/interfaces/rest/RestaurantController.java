@@ -1,5 +1,6 @@
 package pe.edu.upc.proyect.tastetourplatform.restaurant.interfaces.rest;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -38,6 +39,7 @@ public class RestaurantController {
         this.restaurantQueryService = restaurantQueryService;
     }
 
+    @Operation(summary = "Obtener lista de Restaurantes")
     @GetMapping
     public ResponseEntity<List<RestaurantResource>> getAllRestaurant(){
         var getAllRestaurantsQuery = new GetAllRestaurantsQuery();
@@ -45,7 +47,7 @@ public class RestaurantController {
         var restaurantResources= restaurants.stream().map(RestaurantResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(restaurantResources);
     }
-
+    @Operation(summary = "Obtener lista de Restaurantes por Id")
     @GetMapping("/{id}")
     public ResponseEntity<RestaurantResource> getRestaurantById(@PathVariable Long id){
         var getRestaurantByIdQuery = new GetRestaurantByIdQuery(id);
@@ -57,6 +59,7 @@ public class RestaurantController {
         return ResponseEntity.ok(restaurantResource);
     }
 
+    @Operation(summary = "Crear un restaurante")
     @PostMapping
     public ResponseEntity<RestaurantResource> createRestaurant(@RequestBody CreateRestaurantResource resource){
         var createRestaurantCommand = CreateRestaurantCommandFromResourceAssembler.toCommandFromResource(resource);
@@ -75,11 +78,12 @@ public class RestaurantController {
         return new ResponseEntity<>(restaurantResource, HttpStatus.CREATED);
 
     }
+    @Operation(summary = "Eliminar un restaurante por Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteRestaurant(@PathVariable Long id){
         var deleteRestaurantCommand = new DeleteRestaurantCommand(id);
         restaurantCommandService.handle(deleteRestaurantCommand);
-        return ResponseEntity.ok("Tour with given id successfully deleted ");
+        return ResponseEntity.ok("Restaurant with given id successfully deleted ");
     }
 
 }
