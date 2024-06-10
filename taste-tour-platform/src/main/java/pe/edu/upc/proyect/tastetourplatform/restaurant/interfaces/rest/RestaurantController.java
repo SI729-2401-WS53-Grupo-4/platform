@@ -17,6 +17,7 @@ import pe.edu.upc.proyect.tastetourplatform.restaurant.interfaces.rest.transform
 import pe.edu.upc.proyect.tastetourplatform.restaurant.interfaces.rest.transform.RestaurantResourceFromEntityAssembler;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.commands.DeleteTourCommand;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.queries.GetAllToursQuery;
+import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.queries.GetToursByIdQuery;
 import pe.edu.upc.proyect.tastetourplatform.tour.interfaces.rest.resources.TourResource;
 import pe.edu.upc.proyect.tastetourplatform.tour.interfaces.rest.transform.TourResourceFromEntityAssembler;
 
@@ -38,11 +39,22 @@ public class RestaurantController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RestaurantResource>> getAllTours(){
+    public ResponseEntity<List<RestaurantResource>> getAllRestaurant(){
         var getAllRestaurantsQuery = new GetAllRestaurantsQuery();
         var restaurants = restaurantQueryService.handle(getAllRestaurantsQuery);
         var restaurantResources= restaurants.stream().map(RestaurantResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(restaurantResources);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RestaurantResource> getRestaurantById(@PathVariable Long id){
+        var getRestaurantByIdQuery = new GetRestaurantByIdQuery(id);
+        var restaurant = restaurantQueryService.handle(getRestaurantByIdQuery);
+
+        if (restaurant.isEmpty())
+            return ResponseEntity.badRequest().build();
+        var restaurantResource = RestaurantResourceFromEntityAssembler.toResourceFromEntity(restaurant.get());
+        return ResponseEntity.ok(restaurantResource);
     }
 
     @PostMapping
