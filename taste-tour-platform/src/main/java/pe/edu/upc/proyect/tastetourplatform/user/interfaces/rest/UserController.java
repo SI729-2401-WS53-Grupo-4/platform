@@ -19,7 +19,6 @@ import pe.edu.upc.proyect.tastetourplatform.user.interfaces.rest.transform.Updat
 import pe.edu.upc.proyect.tastetourplatform.user.interfaces.rest.transform.UserResourceFromEntityAssembler;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController

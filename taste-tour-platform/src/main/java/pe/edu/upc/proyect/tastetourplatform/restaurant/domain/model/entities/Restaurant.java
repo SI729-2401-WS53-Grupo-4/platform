@@ -5,12 +5,13 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 import pe.edu.upc.proyect.tastetourplatform.restaurant.domain.model.commands.CreateRestaurantCommand;
+import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.AuditableModel;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "restaurant")
-public class Restaurant {
+public class Restaurant extends AuditableModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
