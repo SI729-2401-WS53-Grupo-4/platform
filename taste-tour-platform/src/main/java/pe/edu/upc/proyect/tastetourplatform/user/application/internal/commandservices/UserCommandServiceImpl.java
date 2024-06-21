@@ -14,7 +14,8 @@ import java.util.Optional;
 public class UserCommandServiceImpl implements UserCommandService {
     private final UserRepository userRepository;
 
-    public UserCommandServiceImpl(UserRepository userRepository){
+
+    public UserCommandServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

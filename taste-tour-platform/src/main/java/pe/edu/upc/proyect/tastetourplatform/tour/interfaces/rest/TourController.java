@@ -27,7 +27,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping(value="/Api/TasteTour/Tour", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/Api/v1/TasteTour", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name="Tour", description = "Tour Managment Endpoints")
 public class TourController {
     private final TourCommandService tourCommandService;
@@ -38,7 +38,7 @@ public class TourController {
         this.tourQueryService = tourQueryService;
     }
     @Operation(summary = "Crear un Tour")
-    @PostMapping("/create")
+    @PostMapping("/tour/create")
     public ResponseEntity<TourResource> createTour(@RequestBody CreateTourResource createTourResource){
         var createTourCommand = CreateTourCommandFromResourceAssembler.toCommandFromResource(createTourResource);
         var tourId = tourCommandService.handle(createTourCommand);
@@ -55,7 +55,7 @@ public class TourController {
         return new ResponseEntity<>(tourResource, HttpStatus.CREATED);
     }
     @Operation(summary = "Obtener lista de Tours disponibles")
-    @GetMapping
+    @GetMapping("/tour")
     public ResponseEntity<List<TourResource>> getAllTours(){
         var getAllToursQuery = new GetAllToursQuery();
         var tours = tourQueryService.handle(getAllToursQuery);
@@ -63,7 +63,7 @@ public class TourController {
         return ResponseEntity.ok(tourResources);
     }
     @Operation(summary = "Obtener lista de Tours disponibles por Id")
-    @GetMapping("/{id}")
+    @GetMapping("/tour/{id}")
     public ResponseEntity<TourResource> getTourById(@PathVariable Long id){
         var getTourByIdQuery = new GetToursByIdQuery(id);
         var tour = tourQueryService.handle(getTourByIdQuery);
@@ -74,7 +74,7 @@ public class TourController {
         return ResponseEntity.ok(tourResource);
     }
     @Operation(summary = "Modificar un Tour existente por Id")
-    @PutMapping("/{id}")
+    @PutMapping("/tour/{id}")
     public ResponseEntity<TourResource> updateTour(@PathVariable Long id, @RequestBody UpdateTourResource updateTourResource){
         var updateTourCommand = UpdateTourCommandFromResourceAssembler.toCommandFromResource(id,updateTourResource);
         var updatedTour = tourCommandService.handle(updateTourCommand);
@@ -86,7 +86,7 @@ public class TourController {
         return ResponseEntity.ok(tourResource);
     }
     @Operation(summary = "Eliminar un Tour por Id")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/tour/delete/{id}")
     public ResponseEntity<?> deleteTour(@PathVariable Long id){
         var deleteTourCommand = new DeleteTourCommand(id);
         tourCommandService.handle(deleteTourCommand);

@@ -15,13 +15,9 @@ public class User extends AuditableModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "user_firstName"))
-    private FirstName firstName;
+    private String firstName;
 
-    @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "user_lastName"))
-    private LastName lastName;
+    private String lastName;
 
     @Embedded
     @AttributeOverride(name = "value", column = @Column(name = "user_password"))
@@ -39,7 +35,7 @@ public class User extends AuditableModel {
 
     }
 
-    public User updatedInformation(FirstName firstName, LastName lastName, Password password, String location, String birthdate, String email, String phone){
+    public User updatedInformation(String firstName, String lastName, Password password, String location, String birthdate, String email, String phone){
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -50,7 +46,7 @@ public class User extends AuditableModel {
         return this;
     }
 
-    public User(FirstName firstName, LastName lastName, Password password, String location, String birthdate, String email, String phone){
+    public User(String firstName, String lastName, Password password, String location, String birthdate, String email, String phone){
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;

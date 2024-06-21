@@ -22,7 +22,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping(value="/Api/TasteTour/User", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/Api/v1/TasteTour", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name="User", description = "User Managment Endpoints")
 public class UserController {
     private final UserCommandService userCommandService;
@@ -33,7 +33,7 @@ public class UserController {
         this.userQueryService = userQueryService;
     }
     @Operation(summary = "Registar un usuario")
-    @PostMapping("/create")
+    @PostMapping("/user/create")
     public ResponseEntity<UserResource> createUser(@RequestBody CreateUserResource createUserResource){
         var createUserCommand = CreateUserCommandFromResourceAssembler.toCommandFromResource(createUserResource);
         var userId = userCommandService.handle(createUserCommand);
@@ -50,7 +50,7 @@ public class UserController {
         return new ResponseEntity<>(userResource, HttpStatus.CREATED);
     }
     @Operation(summary = "Obtener lista de usuarios registrados")
-    @GetMapping
+    @GetMapping("/user")
     public ResponseEntity<List<UserResource>> getAllUsers(){
         var getAllUsersQuery = new GetAllUsersQuery();
         var users = userQueryService.handle(getAllUsersQuery);
@@ -58,7 +58,7 @@ public class UserController {
         return ResponseEntity.ok(userResources);
     }
     @Operation(summary = "Obtener lista de usuarios registrados por Id")
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity<UserResource> getUserById(@PathVariable Long id){
         var getUserByIdQuery = new GetUserByIdQuery(id);
         var user = userQueryService.handle(getUserByIdQuery);
@@ -69,7 +69,7 @@ public class UserController {
         return ResponseEntity.ok(userResource);
     }
     @Operation(summary = "Modificar un perfil de usuario")
-    @PutMapping("/{id}")
+    @PutMapping("/user/{id}")
     public ResponseEntity<UserResource> updateUser(@PathVariable Long id, @RequestBody UpdateUserResource updateUserResource){
         var updateUserCommand = UpdateUserCommandFromResourceAssembler.toCommandFromResource(id,updateUserResource);
         var updatedUser = userCommandService.handle(updateUserCommand);
@@ -81,7 +81,7 @@ public class UserController {
         return ResponseEntity.ok(userResource);
     }
     @Operation(summary = "Eliminar una cuenta de usuario")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/user/delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id){
         var deleteUserCommand = new DeleteUserCommand(id);
         userCommandService.handle(deleteUserCommand);
