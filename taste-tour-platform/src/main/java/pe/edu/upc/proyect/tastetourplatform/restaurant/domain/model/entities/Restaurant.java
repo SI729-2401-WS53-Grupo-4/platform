@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 import pe.edu.upc.proyect.tastetourplatform.restaurant.domain.model.commands.CreateRestaurantCommand;
+import pe.edu.upc.proyect.tastetourplatform.restaurant.domain.model.valueobjects.Image;
 import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.AuditableModel;
 
@@ -17,27 +18,29 @@ public class Restaurant extends AuditableAbstractAggregateRoot<Restaurant> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
-    @Column(nullable = false)
     private String name;
 
-    @NotEmpty
-    @Column(nullable = false)
-    private String location;
-
-    @NotEmpty
-    @Column(nullable = false)
-    private String time;
-
-    @NotEmpty
-    @Column(nullable = false)
     private String description;
+
+    @Embedded
+    private Image image;
+
+    private String bookingLink;
 
     public Restaurant(CreateRestaurantCommand command ) {
         this.name = command.name();
-        this.location = command.location();
-        this.time = command.time();
         this.description = command.description();
+        this.image = command.image();
+        this.bookingLink = command.bookingLink();
     }
-    public Restaurant(){}
+    public Restaurant(String name, String description, Image image,String bookingLink){
+        this.name = name;
+        this.description = description;
+        this.image= image;
+        this.bookingLink = bookingLink;
+    }
+
+    public Restaurant() {
+
+    }
 }

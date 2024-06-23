@@ -22,7 +22,7 @@ public class UserCommandServiceImpl implements UserCommandService {
 
     @Override
     public Long handle(CreateUserCommand command){
-        User user = new User(command.firstName(), command.lastName(), command.password(), command.location(), command.birthdate(), command.email(), command.phone());
+        User user = new User(command.firstName(), command.lastName(), command.password(), command.location(), command.birthdate(), command.email(), command.phone(),command.debitCard());
 
         /*var userId = externalIamService.fetchUserIdByUsername(command.firstName());
 

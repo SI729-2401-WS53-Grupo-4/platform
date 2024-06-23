@@ -5,6 +5,6 @@ import pe.edu.upc.proyect.tastetourplatform.user.interfaces.rest.resources.Creat
 
 public class CreateUserCommandFromResourceAssembler {
     public static CreateUserCommand toCommandFromResource(CreateUserResource resource){
-        return new CreateUserCommand(resource.firstName(),resource.lastName(),resource.password(),resource.location(),resource.birthdate(),resource.email(),resource.phone());
+        return new CreateUserCommand(resource.firstName(),resource.lastName(),resource.password(),resource.location(),resource.birthdate(),resource.email(),resource.phone(),resource.debitCard());
     }
 }

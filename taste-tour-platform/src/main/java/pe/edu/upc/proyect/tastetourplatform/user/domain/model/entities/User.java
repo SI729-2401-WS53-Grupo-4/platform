@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.AuditableModel;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.aggregates.Reserva;
+import pe.edu.upc.proyect.tastetourplatform.user.domain.model.aggregates.DebitCard;
 import pe.edu.upc.proyect.tastetourplatform.user.domain.model.valueobjects.*;
 
 import java.util.Date;
@@ -33,8 +34,9 @@ public class User extends AuditableModel {
 
     private String phone;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Reserva> reservas;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "debit_card_id", referencedColumnName = "id")
+    private DebitCard debitCard;
 
     public User() {
     }
@@ -47,10 +49,11 @@ public class User extends AuditableModel {
         this.birthdate = birthdate;
         this.email = email;
         this.phone = phone;
+        this.debitCard = debitCard;
         return this;
     }
 
-    public User(String firstName, String lastName, Long password, String location, Date birthdate, String email, String phone){
+    public User(String firstName, String lastName, Long password, String location, Date birthdate, String email, String phone,  DebitCard debitCard){
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -58,6 +61,7 @@ public class User extends AuditableModel {
         this.birthdate = birthdate;
         this.email = email;
         this.phone = phone;
+        this.debitCard = debitCard;
     }
 
 }

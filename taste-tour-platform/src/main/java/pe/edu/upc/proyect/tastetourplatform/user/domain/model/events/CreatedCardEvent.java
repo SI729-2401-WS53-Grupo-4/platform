@@ -4,11 +4,11 @@ import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
 @Getter
-public class CreatedReviewEvent extends ApplicationEvent {
-    private final Long reviewId;
+public class CreatedCardEvent extends ApplicationEvent {
+    private final Long cardId;
 
-    public CreatedReviewEvent(Object source, Long reviewId) {
+    public CreatedCardEvent(Object source, Long cardId) {
         super(source);
-        this.reviewId = reviewId;
+        this.cardId = cardId;
     }
 }

@@ -23,4 +23,15 @@ public class Review extends AuditableModel {
     @AttributeOverride(name = "value", column = @Column(name = "review_comment"))
     private Comment comment;
 
+    public Review updatedInformation(Rating rating, Comment comment){
+        this.rating = rating;
+        this.comment = comment;
+        return this;
+    }
+
+    public Review(Rating rating, Comment comment){
+        this.rating = rating;
+        this.comment = comment;
+    }
+
 }

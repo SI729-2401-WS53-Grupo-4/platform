@@ -25,9 +25,8 @@ import pe.edu.upc.proyect.tastetourplatform.tour.interfaces.rest.transform.TourR
 import java.awt.*;
 import java.util.List;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping(value="/Api/v1/TasteTour", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/Api/v1/TasteTour/restaurant", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name="Restaurant", description = "Restaurant Managment Endpoints")
 public class RestaurantController {
     private final RestaurantCommandService restaurantCommandService;
@@ -41,7 +40,7 @@ public class RestaurantController {
     }
 
     @Operation(summary = "Obtener lista de Restaurantes")
-    @GetMapping("/restaurant")
+    @GetMapping
     public ResponseEntity<List<RestaurantResource>> getAllRestaurant(){
         var getAllRestaurantsQuery = new GetAllRestaurantsQuery();
         var restaurants = restaurantQueryService.handle(getAllRestaurantsQuery);
@@ -49,7 +48,7 @@ public class RestaurantController {
         return ResponseEntity.ok(restaurantResources);
     }
     @Operation(summary = "Obtener lista de Restaurantes por Id")
-    @GetMapping("/restaurant/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<RestaurantResource> getRestaurantById(@PathVariable Long id){
         var getRestaurantByIdQuery = new GetRestaurantByIdQuery(id);
         var restaurant = restaurantQueryService.handle(getRestaurantByIdQuery);
@@ -61,7 +60,7 @@ public class RestaurantController {
     }
 
     @Operation(summary = "Crear un restaurante")
-    @PostMapping("/restaurant/create")
+    @PostMapping("/create")
     public ResponseEntity<RestaurantResource> createRestaurant(@RequestBody CreateRestaurantResource resource){
         var createRestaurantCommand = CreateRestaurantCommandFromResourceAssembler.toCommandFromResource(resource);
         var restaurantId = restaurantCommandService.handle(createRestaurantCommand);
@@ -80,7 +79,7 @@ public class RestaurantController {
 
     }
     @Operation(summary = "Eliminar un restaurante por Id")
-    @DeleteMapping("/restaurant/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteRestaurant(@PathVariable Long id){
         var deleteRestaurantCommand = new DeleteRestaurantCommand(id);
         restaurantCommandService.handle(deleteRestaurantCommand);

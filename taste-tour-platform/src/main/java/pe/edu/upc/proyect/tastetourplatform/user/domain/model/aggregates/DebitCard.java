@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.AuditableModel;
-import pe.edu.upc.proyect.tastetourplatform.user.domain.model.valueobjects.*;
 
 @Entity
 @Getter
@@ -15,15 +14,29 @@ public class DebitCard extends AuditableModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "card_num"))
-    private NumCard numCard;
+    private Long numCard;
 
-    @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "card_cvv"))
-    private Cvv cvv;
+    private Long cvv;
 
     private String date;
 
     private String name;
+
+    public DebitCard() {
+
+    }
+    public DebitCard updatedInformation(Long numCard, Long cvv, String date, String name){
+        this.numCard = numCard;
+        this.cvv = cvv;
+        this.date = date;
+        this.name = name;
+        return this;
+    }
+
+    public DebitCard(Long numCard, Long cvv, String date, String name){
+        this.numCard = numCard;
+        this.cvv = cvv;
+        this.date = date;
+        this.name = name;
+    }
 }
