@@ -8,12 +8,13 @@ import pe.edu.upc.proyect.tastetourplatform.user.domain.model.entities.User;
 import pe.edu.upc.proyect.tastetourplatform.user.domain.services.UserCommandService;
 import pe.edu.upc.proyect.tastetourplatform.user.insfractructure.persistence.jpa.repositories.UserRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserCommandServiceImpl implements UserCommandService {
     private final UserRepository userRepository;
-
 
     public UserCommandServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -21,15 +22,19 @@ public class UserCommandServiceImpl implements UserCommandService {
 
     @Override
     public Long handle(CreateUserCommand command){
-        User user = new User(
-                command.firstName(),
-                command.lastName(),
-                command.password(),
-                command.location(),
-                command.birthdate(),
-                command.email(),
-                command.phone()
-        );
+        User user = new User(command.firstName(), command.lastName(), command.password(), command.location(), command.birthdate(), command.email(), command.phone());
+
+        /*var userId = externalIamService.fetchUserIdByUsername(command.firstName());
+
+        if (userId == 0L) {
+
+            List<String> roleNames = new ArrayList<>();
+            roleNames.add("ROLE_USER");
+
+            userId = externalIamService.createUser(command.firstName(), command.lastName(), roleNames);
+            if (userId == 0L)
+                throw new IllegalArgumentException("Unable to create user");
+        }*/
         userRepository.save(user);
         return user.getId();
     }

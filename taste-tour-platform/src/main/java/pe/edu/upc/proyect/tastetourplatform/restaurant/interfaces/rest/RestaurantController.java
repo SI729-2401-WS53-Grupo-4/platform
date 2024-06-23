@@ -25,6 +25,7 @@ import pe.edu.upc.proyect.tastetourplatform.tour.interfaces.rest.transform.TourR
 import java.awt.*;
 import java.util.List;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value="/Api/v1/TasteTour", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name="Restaurant", description = "Restaurant Managment Endpoints")

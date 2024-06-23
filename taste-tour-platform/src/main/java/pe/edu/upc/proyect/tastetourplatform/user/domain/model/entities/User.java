@@ -4,7 +4,11 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.AuditableModel;
+import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.aggregates.Reserva;
 import pe.edu.upc.proyect.tastetourplatform.user.domain.model.valueobjects.*;
+
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,23 +23,23 @@ public class User extends AuditableModel {
 
     private String lastName;
 
-    @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "user_password"))
-    private Password password;
+    private Long password;
 
     private String location;
 
-    private String birthdate;
+    private Date birthdate;
 
     private String email;
 
     private String phone;
 
-    public User() {
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reserva> reservas;
 
+    public User() {
     }
 
-    public User updatedInformation(String firstName, String lastName, Password password, String location, String birthdate, String email, String phone){
+    public User updatedInformation(String firstName, String lastName, Long password, String location, Date birthdate, String email, String phone){
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -46,7 +50,7 @@ public class User extends AuditableModel {
         return this;
     }
 
-    public User(String firstName, String lastName, Password password, String location, String birthdate, String email, String phone){
+    public User(String firstName, String lastName, Long password, String location, Date birthdate, String email, String phone){
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;

@@ -6,6 +6,6 @@ import pe.edu.upc.proyect.tastetourplatform.tour.interfaces.rest.resources.Creat
 public class CreateTourCommandFromResourceAssembler {
 
     public static AddTourCommand toCommandFromResource(CreateTourResource resource){
-         return new AddTourCommand(resource.titleTour(),resource.description(),resource.instructor(),resource.rating(),resource.capacity(),resource.duration(),resource.date(),resource.price(), resource.restaurantId().getId());
+         return new AddTourCommand(resource.titleTour(),resource.description(),resource.instructor(),resource.rating(),resource.capacity(),resource.duration(),resource.date(),resource.price(), resource.restaurantId());
     }
 }
