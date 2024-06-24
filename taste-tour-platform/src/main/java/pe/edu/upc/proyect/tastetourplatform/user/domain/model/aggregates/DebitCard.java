@@ -25,6 +25,7 @@ public class DebitCard extends AuditableModel {
     public DebitCard() {
 
     }
+
     public DebitCard updatedInformation(Long numCard, Long cvv, String date, String name){
         this.numCard = numCard;
         this.cvv = cvv;
@@ -33,10 +34,11 @@ public class DebitCard extends AuditableModel {
         return this;
     }
 
-    public DebitCard(Long numCard, Long cvv, String date, String name){
+    public DebitCard(Long numCard, Long cvv, String date, String name) {
         this.numCard = numCard;
         this.cvv = cvv;
         this.date = date;
         this.name = name;
     }
+
 }

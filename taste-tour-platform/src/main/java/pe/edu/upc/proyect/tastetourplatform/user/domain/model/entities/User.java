@@ -8,6 +8,7 @@ import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.aggregates.Reserva
 import pe.edu.upc.proyect.tastetourplatform.user.domain.model.aggregates.DebitCard;
 import pe.edu.upc.proyect.tastetourplatform.user.domain.model.valueobjects.*;
 
+import java.lang.reflect.Array;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class User extends AuditableModel {
 
     private String lastName;
 
+
     private Long password;
 
     private String location;
@@ -38,6 +40,7 @@ public class User extends AuditableModel {
     @JoinColumn(name = "debit_card_id", referencedColumnName = "id")
     private DebitCard debitCard;
 
+
     public User() {
     }
 
@@ -49,7 +52,6 @@ public class User extends AuditableModel {
         this.birthdate = birthdate;
         this.email = email;
         this.phone = phone;
-        this.debitCard = debitCard;
         return this;
     }
 

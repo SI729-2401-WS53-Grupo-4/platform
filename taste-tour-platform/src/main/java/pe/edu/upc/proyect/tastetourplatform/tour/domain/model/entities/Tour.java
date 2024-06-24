@@ -1,12 +1,13 @@
 package pe.edu.upc.proyect.tastetourplatform.tour.domain.model.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import pe.edu.upc.proyect.tastetourplatform.restaurant.domain.model.entities.Restaurant;
 import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.AuditableModel;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.valueobjects.*;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,32 +21,36 @@ public class Tour extends AuditableModel {
     private String titleTour;
 
     @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "firstName", column = @Column(name = "instructor_first_name")),
-            @AttributeOverride(name = "lastName", column = @Column(name = "instructor_last_name")),
-    })
-    private Instructor instructor;
+    private ImageTour imageTour;
 
-    @NotNull
-    private String description;
+    private String instructor;
 
-    @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "tour_rating"))
-    private Rating rating;
+    private Long rating;
+
+    private Long nRatings;
 
     @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "tour_capacity"))
-    private Capacity capacity;
+    private Price minPrice;
 
-    @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "tour_duration"))
-    private Duration duration;
+    private Long currentPeople;
+
+    private Long maxPeople;
+
+    private String language;
+
+    private Long duration;
+
+    @ElementCollection
+    private List<String> itemsIncluded;
 
     private String date;
 
-    @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "tour_price"))
-    private Price price;
+    private String description;
+
+    @ElementCollection
+    private List<String> times;
+
+    private String hours;
 
     @ManyToOne
     @JoinColumn(name= "restaurant_id")
@@ -53,28 +58,42 @@ public class Tour extends AuditableModel {
 
     public Tour() {}
 
-    public Tour updatedInformation(String titleTour, Instructor instructor, String description, Rating rating, Capacity capacity, Duration duration, String date, Price price,Restaurant restaurantId){
+    public Tour updatedInformation(String titleTour, ImageTour imageTour, String instructor, Long rating, Long nRatings, Price minPrice, Long currentPeople, Long maxPeople, String language, Long duration, List<String> itemsIncluded, String date, String description, List<String> times, String hours, Restaurant restaurantId){
         this.titleTour = titleTour;
+        this.imageTour = imageTour;
         this.instructor = instructor;
-        this.description = description;
         this.rating = rating;
-        this.capacity = capacity;
+        this.nRatings = nRatings;
+        this.minPrice = minPrice;
+        this.currentPeople = currentPeople;
+        this.maxPeople = maxPeople;
+        this.language = language;
         this.duration = duration;
+        this.itemsIncluded = itemsIncluded;
         this.date = date;
-        this.price = price;
+        this.description = description;
+        this.times = times;
+        this.hours = hours;
         this.restaurantId = restaurantId;
         return this;
     }
 
-    public Tour(String titleTour, Instructor instructor, String description, Rating rating, Capacity capacity, Duration duration, String date, Price price,Restaurant restaurantId) {
+    public Tour(String titleTour, ImageTour imageTour, String instructor, Long rating, Long nRatings, Price minPrice, Long currentPeople, Long maxPeople, String language, Long duration, List<String> itemsIncluded, String date, String description, List<String> times, String hours, Restaurant restaurantId) {
         this.titleTour = titleTour;
+        this.imageTour = imageTour;
         this.instructor = instructor;
-        this.description = description;
         this.rating = rating;
-        this.capacity = capacity;
+        this.nRatings = nRatings;
+        this.minPrice = minPrice;
+        this.currentPeople = currentPeople;
+        this.maxPeople = maxPeople;
+        this.language = language;
         this.duration = duration;
+        this.itemsIncluded = itemsIncluded;
         this.date = date;
-        this.price = price;
+        this.description = description;
+        this.times = times;
+        this.hours = hours;
         this.restaurantId = restaurantId;
     }
 }

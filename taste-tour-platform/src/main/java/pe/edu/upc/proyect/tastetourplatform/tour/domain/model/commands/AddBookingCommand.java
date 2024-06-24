@@ -1,4 +1,6 @@
 package pe.edu.upc.proyect.tastetourplatform.tour.domain.model.commands;
 
-public record AddBookingCommand(String title, String image, Integer duration, Float price) {
+import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.valueobjects.Price;
+
+public record AddBookingCommand(String title, String image, Integer duration, Price price) {
 }
