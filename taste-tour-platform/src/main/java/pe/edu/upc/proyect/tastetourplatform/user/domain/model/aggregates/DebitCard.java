@@ -22,9 +22,6 @@ public class DebitCard extends AuditableModel {
 
     private String name;
 
-    public DebitCard() {
-
-    }
 
     public DebitCard updatedInformation(Long numCard, Long cvv, String date, String name){
         this.numCard = numCard;

@@ -1,6 +1,7 @@
 package pe.edu.upc.proyect.tastetourplatform.user.application.internal.commandservices;
 
 import org.springframework.stereotype.Service;
+import pe.edu.upc.proyect.tastetourplatform.user.application.internal.outboundservices.ExternalIamService;
 import pe.edu.upc.proyect.tastetourplatform.user.domain.model.commands.CreateUserCommand;
 import pe.edu.upc.proyect.tastetourplatform.user.domain.model.commands.DeleteUserCommand;
 import pe.edu.upc.proyect.tastetourplatform.user.domain.model.commands.UpdateUserCommand;
@@ -15,16 +16,18 @@ import java.util.Optional;
 @Service
 public class UserCommandServiceImpl implements UserCommandService {
     private final UserRepository userRepository;
+    private final ExternalIamService externalIamService;
 
-    public UserCommandServiceImpl(UserRepository userRepository) {
+    public UserCommandServiceImpl(UserRepository userRepository, ExternalIamService externalIamService) {
         this.userRepository = userRepository;
+        this.externalIamService = externalIamService;
     }
 
     @Override
     public Long handle(CreateUserCommand command){
         User user = new User(command.firstName(), command.lastName(), command.password(), command.location(), command.birthdate(), command.email(), command.phone(),command.debitCard());
 
-        /*var userId = externalIamService.fetchUserIdByUsername(command.firstName());
+        var userId = externalIamService.fetchUserIdByUsername(command.firstName());
 
         if (userId == 0L) {
 
@@ -34,7 +37,7 @@ public class UserCommandServiceImpl implements UserCommandService {
             userId = externalIamService.createUser(command.firstName(), command.lastName(), roleNames);
             if (userId == 0L)
                 throw new IllegalArgumentException("Unable to create user");
-        }*/
+        }
         userRepository.save(user);
         return user.getId();
     }

@@ -25,7 +25,6 @@ public class User extends AuditableModel {
 
     private String lastName;
 
-
     private Long password;
 
     private String location;
