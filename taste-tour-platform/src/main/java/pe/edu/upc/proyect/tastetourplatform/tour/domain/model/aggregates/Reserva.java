@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import pe.edu.upc.proyect.tastetourplatform.shared.domain.model.entities.AuditableModel;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.entities.Tour;
+import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.valueobjects.ImageTour;
 import pe.edu.upc.proyect.tastetourplatform.tour.domain.model.valueobjects.Price;
 import pe.edu.upc.proyect.tastetourplatform.user.domain.model.entities.User;
 
@@ -17,28 +18,32 @@ public class Reserva extends AuditableModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
-
-    private String image;
-
-    private Integer duration;
-
-    @Embedded
-    private Price price;
-
     @ManyToOne
     @JoinColumn(name = "tour_id")
-    private Tour tour_id;
+    private Tour tour;
 
-    public Reserva(String title,String image, Integer duration, Price price, Tour tour_id){
-        this.title = title;
-        this.image = image;
-        this.duration = duration;
-        this.price = price;
-        this.tour_id = tour_id;
-    }
+    // Datos del tour copiados
+    private String titleTour;
+    @Embedded
+    private ImageTour imageTour;
+
+    private Long duration;
+
+    private Long minPrice;
 
     public Reserva() {
 
     }
+    public Reserva(Tour tour){
+        this.tour = tour;
+        if (tour != null) {
+            this.titleTour = tour.getTitleTour();
+            this.imageTour = tour.getImageTour();
+            this.duration = tour.getDuration();
+            this.minPrice = tour.getMinPrice();
+        }
+
+    }
+
+
 }

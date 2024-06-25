@@ -29,8 +29,7 @@ public class Tour extends AuditableModel {
 
     private Long nRatings;
 
-    @Embedded
-    private Price minPrice;
+    private Long minPrice;
 
     private Long currentPeople;
 
@@ -58,7 +57,7 @@ public class Tour extends AuditableModel {
 
     public Tour() {}
 
-    public Tour updatedInformation(String titleTour, ImageTour imageTour, String instructor, Long rating, Long nRatings, Price minPrice, Long currentPeople, Long maxPeople, String language, Long duration, List<String> itemsIncluded, String date, String description, List<String> times, String hours, Restaurant restaurantId){
+    public Tour updatedInformation(String titleTour, ImageTour imageTour, String instructor, Long rating, Long nRatings, Long minPrice, Long currentPeople, Long maxPeople, String language, Long duration, List<String> itemsIncluded, String date, String description, List<String> times, String hours, Restaurant restaurantId){
         this.titleTour = titleTour;
         this.imageTour = imageTour;
         this.instructor = instructor;
@@ -78,7 +77,7 @@ public class Tour extends AuditableModel {
         return this;
     }
 
-    public Tour(String titleTour, ImageTour imageTour, String instructor, Long rating, Long nRatings, Price minPrice, Long currentPeople, Long maxPeople, String language, Long duration, List<String> itemsIncluded, String date, String description, List<String> times, String hours, Restaurant restaurantId) {
+    public Tour(String titleTour, ImageTour imageTour, String instructor, Long rating, Long nRatings, Long minPrice, Long currentPeople, Long maxPeople, String language, Long duration, List<String> itemsIncluded, String date, String description, List<String> times, String hours, Restaurant restaurantId) {
         this.titleTour = titleTour;
         this.imageTour = imageTour;
         this.instructor = instructor;
