@@ -1,5 +1,6 @@
 package pe.edu.upc.proyect.tastetourplatform.tour.interfaces.rest;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ public class BookingController {
         this.reservaCommandService = reservaCommandService;
     }
 
+    @Operation(summary = "Obtener un tour reservado")
     @GetMapping("/{id}")
     public ResponseEntity<ReservaResource> getReservaDetails(@PathVariable Long id) {
         var AddBookingDetailsCommand = new AddBookingDetailsCommand(id);

@@ -1,5 +1,6 @@
 package pe.edu.upc.proyect.tastetourplatform.user.interfaces.rest;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,6 +29,7 @@ public class CardController {
         this.cardQueryService = cardQueryService;
     }
 
+    @Operation(summary = "Crear una tarjeta de debito")
     @PostMapping("/create")
     public ResponseEntity<CardResource> addCard(@RequestBody AddCardResource addCardResource){
         var addCardCommand = AddCardCommandFromResourceAssembler.toCommandFromResource(addCardResource);
@@ -45,6 +47,7 @@ public class CardController {
         return new ResponseEntity<>(cardResource, HttpStatus.CREATED);
     }
 
+    @Operation(summary = "Obtener una tarjeta de debito")
     @GetMapping
     public ResponseEntity<List<CardResource>> getAllCards(){
         var getAllCardsQuery = new GetAllCardsQuery();
@@ -52,6 +55,7 @@ public class CardController {
         var cardResources= cards.stream().map(CardResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(cardResources);
     }
+    @Operation(summary = "Obtener una tarjeta de debito por id")
     @GetMapping("/{id}")
     public ResponseEntity<CardResource> getCardById(@PathVariable Long id){
         var getCardByIdQuery = new GetCardByIdQuery(id);
@@ -63,6 +67,7 @@ public class CardController {
         return ResponseEntity.ok(cardResource);
     }
 
+    @Operation(summary = "Modificar una tarjeta de debito")
     @PutMapping("/{id}")
     public ResponseEntity<CardResource> updateCard(@PathVariable Long id, @RequestBody UpdateCardResource updateCardResource){
         var updateCardCommand = UpdateCardCommandFromResourceAssembler.toCommandFromResource(id,updateCardResource);
@@ -74,6 +79,7 @@ public class CardController {
         var cardResource = CardResourceFromEntityAssembler.toResourceFromEntity(updatedCard.get());
         return ResponseEntity.ok(cardResource);
     }
+    @Operation(summary = "Eliminar una tarjeta de debito")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCard(@PathVariable Long id){
         var deleteCardCommand = new DeleteCardCommand(id);
